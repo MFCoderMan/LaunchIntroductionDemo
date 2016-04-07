@@ -146,24 +146,18 @@ NSString *enterBtnImage;
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == launchScrollView) {
-        [self isScrolltoLeft:scrollView];
         int cuttentIndex = (int)(scrollView.contentOffset.x + kScreen_width/2)/kScreen_width;
         page.currentPage = cuttentIndex;
     }
 }
 #pragma mark - 判断滚动方向
 -(BOOL )isScrolltoLeft:(UIScrollView *) scrollView{
-    BOOL ret = NO;
-    static CGFloat newX = 0;
-    static CGFloat oldX = 0;
-    newX = scrollView.contentOffset.x;
-    if (newX > oldX) {
-        ret = YES;
+    //返回YES为向左反动，NO为右滚动
+    if ([scrollView.panGestureRecognizer translationInView:scrollView.superview].x < 0) {
+        return YES;
     }else{
-        ret = NO;
+        return NO;
     }
-    oldX = newX;
-    return ret;//返回YES就是向左滑动，返货NO就是向右滑动
 }
 #pragma mark - KVO监测值的变化
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
