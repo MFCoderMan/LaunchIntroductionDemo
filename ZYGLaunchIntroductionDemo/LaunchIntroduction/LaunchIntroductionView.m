@@ -36,6 +36,8 @@ NSString *enterBtnImage;
     });
     return launch;
 }
+
+#pragma mark - 创建单例-->>带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames buttonImage:(NSString *)buttonImageName buttonFrame:(CGRect)frame{
     static LaunchIntroductionView *launch = nil;
     static dispatch_once_t onceToken;
@@ -76,8 +78,8 @@ NSString *enterBtnImage;
     NSString *version = [[NSUserDefaults standardUserDefaults] objectForKey:kAppVersion];
     //版本升级或首次登录
     if (version == nil || ![version isEqualToString:currentAppVersion]) {
-//        [[NSUserDefaults standardUserDefaults] setObject:currentAppVersion forKey:kAppVersion];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:currentAppVersion forKey:kAppVersion];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         return YES;
     }else{
         return NO;
