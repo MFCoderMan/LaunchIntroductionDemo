@@ -23,32 +23,24 @@ NSArray *images;
 BOOL isScrollOut;//在最后一页再次滑动是否隐藏引导页
 CGRect enterBtnFrame;
 NSString *enterBtnImage;
-
-#pragma mark - 创建单例-->>不带button
+static LaunchIntroductionView *launch = nil;
+#pragma mark - 创建对象-->>不带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames{
-    static LaunchIntroductionView *launch = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        images = imageNames;
-        isScrollOut = YES;
-        launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
-        launch.backgroundColor = [UIColor whiteColor];
-    });
+    images = imageNames;
+    isScrollOut = YES;
+    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
 
-#pragma mark - 创建单例-->>带button
+#pragma mark - 创建对象-->>带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames buttonImage:(NSString *)buttonImageName buttonFrame:(CGRect)frame{
-    static LaunchIntroductionView *launch = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        images = imageNames;
-        isScrollOut = NO;
-        enterBtnFrame = frame;
-        enterBtnImage = buttonImageName;
-        launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
-        launch.backgroundColor = [UIColor whiteColor];
-    });
+    images = imageNames;
+    isScrollOut = NO;
+    enterBtnFrame = frame;
+    enterBtnImage = buttonImageName;
+    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
 #pragma mark - 初始化
@@ -64,7 +56,6 @@ NSString *enterBtnImage;
             [self addImages];
         }else{
             [self removeFromSuperview];
-            self = nil;
         }
     }
     return self;
