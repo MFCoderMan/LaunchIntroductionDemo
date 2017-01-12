@@ -30,10 +30,13 @@
     [LaunchIntroductionView sharedWithImages:@[@"launch0.jpg",@"launch1.jpg",@"launch2.jpg",@"launch3"]];
 #elif 0
     [LaunchIntroductionView sharedWithImages:@[@"launch0.jpg",@"launch1.jpg",@"launch2.jpg",@"launch3"] buttonImage:@"login" buttonFrame:CGRectMake(kScreen_width/2 - 551/4, kScreen_height - 150, 551/2, 45)];
-#else
+#elif 0
     LaunchIntroductionView *launch = [LaunchIntroductionView sharedWithImages:@[@"launch0.jpg",@"launch1.jpg",@"launch2.jpg",@"launch3"] buttonImage:@"login" buttonFrame:CGRectMake(kScreen_width/2 - 551/4, kScreen_height - 150, 551/2, 45)];
     launch.currentColor = [UIColor redColor];
     launch.nomalColor = [UIColor greenColor];
+#else
+    //只有在存在该storyboard时才调用该方法，否则会引起crash
+    [LaunchIntroductionView sharedWithStoryboard:@"Main" images:@[@"launch0.jpg",@"launch1.jpg",@"launch2.jpg",@"launch3"] buttonImage:@"login" buttonFrame:CGRectMake(kScreen_width/2 - 551/4, kScreen_height - 150, 551/2, 45)];
 #endif
     return YES;
 }

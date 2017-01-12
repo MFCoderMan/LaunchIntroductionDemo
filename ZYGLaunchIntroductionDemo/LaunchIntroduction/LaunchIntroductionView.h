@@ -39,4 +39,25 @@
  */
 +(instancetype)sharedWithImages:(NSArray *) imageNames buttonImage:(NSString *) buttonImageName buttonFrame:(CGRect ) frame;
 
+/**
+ 用storyboard创建的project调用此方法
+
+ @param storyboardName storyboardName
+ @param imageNames 图片名字数组
+ @return LaunchIntroductionView对象
+ */
++ (instancetype)sharedWithStoryboardName:(NSString *)storyboardName images:(NSArray *)imageNames;
+
+/**
+ 用storyboard创建的project调用此方法
+
+ @param storyboardName storyboardName
+ @param imageNames 图片名字数组
+ @param buttonImageName 按钮图片名字
+ @param frame 按钮的frame
+ @return LaunchIntroductionView对象
+ */
++(instancetype)sharedWithStoryboard:(NSString *)storyboardName images:(NSArray *) imageNames buttonImage:(NSString *) buttonImageName buttonFrame:(CGRect ) frame;
+
+
 @end

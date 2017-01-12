@@ -24,6 +24,8 @@ BOOL isScrollOut;//在最后一页再次滑动是否隐藏引导页
 CGRect enterBtnFrame;
 NSString *enterBtnImage;
 static LaunchIntroductionView *launch = nil;
+NSString *storyboard;
+
 #pragma mark - 创建对象-->>不带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames{
     images = imageNames;
@@ -43,6 +45,26 @@ static LaunchIntroductionView *launch = nil;
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
+#pragma mark - 用storyboard创建的项目时调用，不带button
++ (instancetype)sharedWithStoryboardName:(NSString *)storyboardName images:(NSArray *)imageNames {
+    images = imageNames;
+    storyboard = storyboardName;
+    isScrollOut = YES;
+    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    launch.backgroundColor = [UIColor whiteColor];
+    return launch;
+}
+#pragma mark - 用storyboard创建的项目时调用，带button
++ (instancetype)sharedWithStoryboard:(NSString *)storyboardName images:(NSArray *)imageNames buttonImage:(NSString *)buttonImageName buttonFrame:(CGRect)frame{
+    images = imageNames;
+    isScrollOut = NO;
+    enterBtnFrame = frame;
+    storyboard = storyboardName;
+    enterBtnImage = buttonImageName;
+    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    launch.backgroundColor = [UIColor whiteColor];
+    return launch;
+}
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -51,8 +73,15 @@ static LaunchIntroductionView *launch = nil;
         [self addObserver:self forKeyPath:@"currentColor" options:NSKeyValueObservingOptionNew context:nil];
         [self addObserver:self forKeyPath:@"nomalColor" options:NSKeyValueObservingOptionNew context:nil];
         if ([self isFirstLauch]) {
-            UIWindow *window = [[UIApplication sharedApplication] windows].lastObject;
-            [window addSubview:self];
+            UIStoryboard *story = [UIStoryboard storyboardWithName:storyboard bundle:nil];
+            UIWindow *window = [UIApplication sharedApplication].windows.lastObject;
+            if (story) {
+                UIViewController * vc = story.instantiateInitialViewController;
+                window.rootViewController = vc;
+                [vc.view addSubview:self];
+            }else {
+                [window addSubview:self];
+            }
             [self addImages];
         }else{
             [self removeFromSuperview];
@@ -62,6 +91,7 @@ static LaunchIntroductionView *launch = nil;
 }
 #pragma mark - 判断是不是首次登录或者版本更新
 -(BOOL )isFirstLauch{
+    return YES;
     //获取当前版本号
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     NSString *currentAppVersion = infoDic[@"CFBundleShortVersionString"];
