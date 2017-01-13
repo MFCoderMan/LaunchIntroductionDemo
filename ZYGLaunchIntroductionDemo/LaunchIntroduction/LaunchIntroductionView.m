@@ -91,7 +91,6 @@ NSString *storyboard;
 }
 #pragma mark - 判断是不是首次登录或者版本更新
 -(BOOL )isFirstLauch{
-    return YES;
     //获取当前版本号
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
     NSString *currentAppVersion = infoDic[@"CFBundleShortVersionString"];
