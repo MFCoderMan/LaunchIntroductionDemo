@@ -73,7 +73,10 @@ NSString *storyboard;
         [self addObserver:self forKeyPath:@"currentColor" options:NSKeyValueObservingOptionNew context:nil];
         [self addObserver:self forKeyPath:@"nomalColor" options:NSKeyValueObservingOptionNew context:nil];
         if ([self isFirstLauch]) {
-            UIStoryboard *story = [UIStoryboard storyboardWithName:storyboard bundle:nil];
+            UIStoryboard *story;
+            if (storyboard) {
+                story = [UIStoryboard storyboardWithName:storyboard bundle:nil];
+            }
             UIWindow *window = [UIApplication sharedApplication].windows.lastObject;
             if (story) {
                 UIViewController * vc = story.instantiateInitialViewController;

@@ -232,6 +232,7 @@
 				TargetAttributes = {
 					02FE257B1CB5F469006F5350 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 327TE6362Z;
 					};
 					02FE258E1CB5F469006F5350 = {
 						CreatedOnToolsVersion = 7.2;
@@ -433,10 +434,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 327TE6362Z;
 				INFOPLIST_FILE = ZYGLaunchIntroductionDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.huaxinlongma.ZYGLaunchIntroductionDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mytest.launchtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -445,10 +447,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 327TE6362Z;
 				INFOPLIST_FILE = ZYGLaunchIntroductionDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.huaxinlongma.ZYGLaunchIntroductionDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mytest.launchtest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
