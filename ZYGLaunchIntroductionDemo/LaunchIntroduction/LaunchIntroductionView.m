@@ -23,14 +23,13 @@ NSArray *images;
 BOOL isScrollOut;//在最后一页再次滑动是否隐藏引导页
 CGRect enterBtnFrame;
 NSString *enterBtnImage;
-static LaunchIntroductionView *launch = nil;
 NSString *storyboard;
 
 #pragma mark - 创建对象-->>不带button
 +(instancetype)sharedWithImages:(NSArray *)imageNames{
     images = imageNames;
     isScrollOut = YES;
-    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    LaunchIntroductionView *launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
@@ -41,7 +40,7 @@ NSString *storyboard;
     isScrollOut = NO;
     enterBtnFrame = frame;
     enterBtnImage = buttonImageName;
-    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    LaunchIntroductionView *launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
@@ -50,7 +49,7 @@ NSString *storyboard;
     images = imageNames;
     storyboard = storyboardName;
     isScrollOut = YES;
-    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    LaunchIntroductionView *launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
@@ -61,7 +60,7 @@ NSString *storyboard;
     enterBtnFrame = frame;
     storyboard = storyboardName;
     enterBtnImage = buttonImageName;
-    launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+    LaunchIntroductionView *launch = [[LaunchIntroductionView alloc] initWithFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
     launch.backgroundColor = [UIColor whiteColor];
     return launch;
 }
@@ -192,6 +191,12 @@ NSString *storyboard;
     if ([keyPath isEqualToString:@"nomalColor"]) {
         page.pageIndicatorTintColor = self.nomalColor;
     }
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"currentColor"];
+    [self removeObserver:self forKeyPath:@"nomalColor"];
 }
 
 @end
